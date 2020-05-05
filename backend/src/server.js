@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path'); //PARA LIDAR COM CAMINHOS
 
 const routes = require('./routes'); //rotas 
 
@@ -10,7 +12,9 @@ mongoose.connect('mongodb+srv://omnistack:omnistack@omnistack-gtobq.mongodb.net/
     useNewUrlParser: true,
 });
 
-app.use(express.json()); //para o express entender requisiçõe JSON
-app.use(routes); //usando as rotas
+app.use(cors()); //PERMITINDO Q O FRONTEND ACESSE A API
+app.use(express.json()); //PARA O EXPRESS ENTENDER REQUISIÇÕES JSON
+app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads'))); //PARA RETORNAR ARQUIVOS ESTÁTICOS, NESSA CASO A IMAGEM
+app.use(routes); //USANDO AS ROTAS
 
 app.listen(3333);

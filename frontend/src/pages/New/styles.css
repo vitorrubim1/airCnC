@@ -1,0 +1,21 @@
+/*input de upload*/
+label#thumbnail{
+    margin-bottom: 20px;
+    border: 2px dashed #ddd;
+    background-size: cover;
+    cursor: pointer;
+    height: 140px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+label#thumbnail input{
+    display: none;
+}
+label#thumbnail.has-thumbnail{
+    border: 0;
+}
+label#thumbnail.has-thumbnail img{
+    display: none; /*tirando a camera da label*/
+}

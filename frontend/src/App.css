@@ -1,38 +1,86 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html, body, #root{
+  min-height: 100%;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body{
+  background: #000 url('./assets/background.jpg') no-repeat;
+  background-size: cover; /*para ocupar todo o espaço da tela*/
+  -webkit-font-smoothing: antialiased !important; /*font bem mais detalhada*/
+}
+body, input, button{
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+/*.container para alinhar tudo ao centro da tela*/
+.container{
+  margin: 80px auto 0;
+  max-width: 450px;
+  width: 100%; /*se o dispositivo tiver menos q 450px, irá ocupar 100%*/
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.content{
+  width: 100%;
+  background: #fff;
+  margin-top: 5vh;
+  border-radius: 4px;
+  padding: 30px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.content > p{ /*primeiro <p> dentro do content*/
+  font-size: 22px;
+  line-height: 30px;
+  margin-bottom: 30px;
+  color: #000000cf;
+}
+.content form{
+  display: flex;
+  flex-direction: column;
+}
+.content form label{
+  font-size: 14px;
+  color: #444;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.content form label span{
+  font-weight: normal;
+  font-size: 13px;
+  color: #777777;
+  text-transform: lowercase;
+}
+.content form label b{
+  color:red;
+}
+.content form input{
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  height: 45px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+.content button.btn{
+  border: 0;
+  border-radius: 2px;
+  width: 100%;
+  height: 42px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #f05a5b;
+  color: #ffffff;
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+button.btn:hover{
+  filter: brightness(85%); /*FILTRO QUE QUE DIMINUI A CLARIDADE*/
 }
