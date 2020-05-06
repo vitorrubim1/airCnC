@@ -69,18 +69,23 @@ body, input, button{
   font-size: 16px;
 }
 .content button.btn{
-  border: 0;
+  border: 1px solid #f05a5b;
   border-radius: 2px;
+  
   width: 100%;
   height: 42px;
   padding: 0 20px;
+  
   font-size: 16px;
   font-weight: bold;
-  background: #f05a5b;
-  color: #ffffff;
+  
+  color: #f05a5b;
+  background-color: #fff;
+
   cursor: pointer;
-  transition: filter 0.3s;
+  transition: 0.3s;
 }
 button.btn:hover{
-  filter: brightness(85%); /*FILTRO QUE QUE DIMINUI A CLARIDADE*/
+  background: #f05a5b;
+  color: #fff;
 }
