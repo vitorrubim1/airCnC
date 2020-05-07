@@ -19,7 +19,7 @@ const SpotSchema = new mongoose.Schema({
 
 //VIRTUAL
 SpotSchema.virtual('thumbnail_url').get(function(){
-    return `http://localhost:3333/files/${this.thumbnail}` //PARA PODER ENVIAR A IMAGEM PRO FRONT
+    return `http://192.168.15.14:3333/files/${this.thumbnail}` //PARA PODER ENVIAR A IMAGEM PRO FRONT
 });
 
 //É A PARTIR DAQUI QUE É CRIADO O MODEL
