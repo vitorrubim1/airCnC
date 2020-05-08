@@ -1,3 +1,6 @@
+ul li p.notificationsMessage{
+    color: #444,
+}
 ul.spot-list{
     width: 100%;
     list-style: none;
@@ -24,4 +27,26 @@ ul.spot-list strong{
 ul.spot-list span{
     font-size: 15px;
     color: #00000098;
+}
+ul.notifications{
+    list-style: none;
+    margin-bottom: 15px;
+}
+ul.notifications li{
+    font-size: 16px;
+    line-height: 24px;
+}
+ul.notifications li button{
+    margin-right: 10px;
+    border: 0;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: transparent;
+}
+ul.notifications li button.accept{
+    color:#84c870;
+}
+ul.notifications li button.reject{
+    color:#e55e5e;
 }
