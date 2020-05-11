@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import socketio from 'socket.io-client';
-import { SafeAreaView, ScrollView, StyleSheet, Image, AsyncStorage, Alert } from 'react-native';
+import { SafeAreaView, Text, ScrollView, TouchableOpacity, StyleSheet, Image, AsyncStorage, Alert } from 'react-native';
 
 import SpotList from '../components/SpotList';
 
 import logo from '../assets/logo.png';
 
-export default function List() {
-  
+export default function List({ navigation }) {
+
   //ESTADOS
   const [techs, setTechs] = useState([]);
 
@@ -18,9 +18,9 @@ export default function List() {
       })
 
       socket.on('booking_response', booking => { //booking EU QUE DEFINO
-        Alert.alert(`Sua reserva em ${booking.spot.company} em ${booking.date} foi ${booking.approved ? 'Aprovado!' : 'NEGADA.'}`)
+        Alert.alert(`Sua reserva em ${booking.spot.company} em ${booking.date} foi ${booking.approved ? 'Aprovado!' : 'NEGADO.'}`)
       })
-    }); 
+    });
   }, []);
 
   useEffect(() => {
@@ -31,21 +31,33 @@ export default function List() {
     });
   }, []);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Image style={styles.logo} source={logo} />
+  async function handleLogout() {
+    await AsyncStorage.clear();
 
-      {/* 
+    navigation.navigate('Login')
+  } 
+
+  return (
+    <>
+      <SafeAreaView style={styles.container}>
+        <Image style={styles.logo} source={logo} />
+
+        <TouchableOpacity onPress={handleLogout} style={styles.logout}>
+          <Text style={styles.logoutText}>Sair</Text>
+        </TouchableOpacity>
+
+        {/* 
         PERCORRO O ESTADO DE TECNOLOGIAS,
         DEFINO UMA PROPRIEDADE DA FORMA QUE EU QUISER, NESTE CASO (tech)
         O COMPONENT VAI SER DIFERENTE PARA CADA TECNOLOGIA DE INTERESSE DO USER 
         key: CADA FILHO DE DENTRO DE UMA ESTRUTURA DE REPETIÇÃO PRECISA TER UM "ID"
       */}
-      <ScrollView>
-        {techs.map(tech => <SpotList key={tech} tech={tech} />)}
-      </ScrollView>
+        <ScrollView>
+          {techs.map(tech => <SpotList key={tech} tech={tech} />)}
+        </ScrollView>
 
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 }
 
@@ -54,8 +66,20 @@ const styles = StyleSheet.create({
     flex: 1
   },
   logo: {
-    height: 40,
+    height: 35,
     resizeMode: "contain", //PARA QUE A IMAGEM FIQUE CONTIDO NO ESPAÇO DEFINIDO
+    alignSelf: "center",
     marginTop: 40
+  },
+  logout: {
+    alignItems: 'flex-end',
+    marginTop: -30,
+    marginRight: 15
+
+  },
+  logoutText: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#f05a5b',
   },
 });
