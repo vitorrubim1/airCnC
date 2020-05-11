@@ -1,14 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Image, AsyncStorage } from 'react-native';
+import React, { useState, useEffect, useReducer } from 'react';
+import socketio from 'socket.io-client';
+import { SafeAreaView, ScrollView, StyleSheet, Image, AsyncStorage, Alert } from 'react-native';
 
 import SpotList from '../components/SpotList';
 
 import logo from '../assets/logo.png';
 
 export default function List() {
-
+  
   //ESTADOS
   const [techs, setTechs] = useState([]);
+
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user_id => { //USER LOGADO
+      const socket = socketio('http://192.168.15.14:3333', {
+        query: { user_id }
+      })
+
+      socket.on('booking_response', booking => { //booking EU QUE DEFINO
+        Alert.alert(`Sua reserva em ${booking.spot.company} em ${booking.date} foi ${booking.approved ? 'Aprovado!' : 'NEGADA.'}`)
+      })
+    }); 
+  }, []);
 
   useEffect(() => {
     AsyncStorage.getItem('techs').then(storagedTechs => { //PEGANDO AS TECHS E JOGANDO NA VARIÁVEL storagedTechs
@@ -43,7 +56,6 @@ const styles = StyleSheet.create({
   logo: {
     height: 40,
     resizeMode: "contain", //PARA QUE A IMAGEM FIQUE CONTIDO NO ESPAÇO DEFINIDO
-    alignSelf: "center",
     marginTop: 40
   },
 });
